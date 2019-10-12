@@ -9,6 +9,7 @@ config.rootPath = '/kyle/workspace/project/tools/evaluation/'
 config.gpuID = 1
 config.prototxt = config.rootPath + 'model_inference/model/deploy_ssd_inceptionv3_512-symbol.prototxt'
 config.caffemodel = config.rootPath + 'model_inference/model/deploy_ssd_inceptionv3_512-0000.caffemodel'
+config.mxnetPrefix = config.rootPath + 'model_inference/model/ssha'
 
 config.testImgPath = '/kyle/workspace/dataset/public/95_FDDB/'
 

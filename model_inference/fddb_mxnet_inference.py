@@ -1,18 +1,17 @@
 import numpy as np
 import cv2
 import mxnet as mx
-
+from fddb_config import config as fc
 
 prefix = "ssdface"
-epoch  = 0
+epoch = 0
 symbol, arg_params, aux_params = mx.model.load_checkpoint(prefix, epoch)
 
 count = 0
-Path = '/home/ubuntu226/DataSet/FDDB/FDDB-folds/'
-f = open('/home/ubuntu226/DataSet/FDDB/test/fddb_dets.txt', 'wt')
+f = open(fc.detFile, 'wt')
 ctx = mx.cpu()
-for Name in open('/home/ubuntu226/DataSet/FDDB/test/fddb_img_list.txt'):
-    Image_Path = Path + Name[:-1] + '.jpg'
+for Name in open(fc.imgList, 'r'):
+    Image_Path = fc.testImgPath + Name[:-1] + '.jpg'
     image = cv2.imread(Image_Path)
     heigh = image.shape[0]
     width = image.shape[1]
@@ -46,7 +45,7 @@ for Name in open('/home/ubuntu226/DataSet/FDDB/test/fddb_img_list.txt'):
 
     f.write('{:s}\n'.format(Name[:-1]))
     f.write('{:.1f}\n'.format(det_conf.shape[0]))
-    for i in xrange(det_conf.shape[0]):
+    for i in range(det_conf.shape[0]):
         xmin = det_xmin[i] * width
         ymin = det_ymin[i] * heigh
         xmax = det_xmax[i] * width
